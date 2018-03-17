@@ -1,6 +1,5 @@
 package com.example.rurocker.metrics.controller;
 
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class CounterController {
 	@Timed(value = "get.counter.requests", histogram = true, percentiles = { 0.95, 0.99 }, extraTags = { "version",
 			"v1" })
 	@GetMapping(path = "/counter")
-	public CounterDto getCounter(@RequestParam("message") String message) throws IOException {
+	public CounterDto getCounter(@RequestParam("message") String message) {
 		CounterDto dto = new CounterDto();
 		dto.setMessage(message);
 		dto.setCounter(atomicInteger.incrementAndGet());
